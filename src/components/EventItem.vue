@@ -8,12 +8,9 @@
 				<div class="event-info">
 					<h3 class="event-title">{{ title }}</h3>
 
-					<div class="event-detail">
-						<div class="event-date">{{ dateFormate }}</div>
-						<div class="event-place">{{ venue }}</div>
-					</div>
-
-					<span class="event-price btn">{{ price }}</span>
+					<div class="event-date">{{ dateFormate }}</div>
+					<div class="event-place">{{ venue }}</div>
+					<span class="event-price btn">{{ price.toLocaleString('ru') }}₽</span>
 				</div>
 			</div>
 		</a>
@@ -91,6 +88,7 @@ export default {
 	}
 
 	&-info {
+		box-sizing: border-box;
 		padding: 16px;
 	}
 
@@ -98,23 +96,45 @@ export default {
 		font-weight: 500;
 		font-size: 15px;
 		line-height: 18px;
-		margin: 0 0 28px;
+		margin: 0 0 14px;
+		min-height: 36px;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
-	&-detail {
+	&-date,
+	&-place {
 		font-size: 13px;
 		line-height: 16px;
-		margin-bottom: 20px;
+
+		white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 	}
 
 	&-date {
-		margin-bottom: 4px
+		margin-bottom: 2px;
+	}
+
+	&-place {
+		margin-bottom: 20px;
 	}
 
 	@media (max-width: 480px) {
+		min-width: 230px;
+		
 		&-content {
 			flex-direction: row;
 		}
+
+		&-info {
+			flex: 1 0 50%;
+			overflow: hidden;
+		}
+
 		&-poster {
 			position: absolute;
 			top: 0;
@@ -125,9 +145,9 @@ export default {
 
 			&-wrapper {
 				overflow: hidden;
-				width: 50%;
 				max-width: 164px;
 				position: relative;
+				flex: 1 0 50%;
 			}
 		}
 	}
